@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ThingsHub</string>
+    <string name="user_name">User Name</string>
+    <string name="friends">Friends</string>
+    <string name="profile_page">Profile Page</string>
+    <string name="signature">Signature</string>
 </resources>
