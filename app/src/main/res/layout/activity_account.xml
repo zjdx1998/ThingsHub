@@ -9,7 +9,7 @@
         android:id="@+id/account_image"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/profile"
         app:civ_border_color="@color/blue"
@@ -19,11 +19,11 @@
         android:id="@+id/account_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/account_image"
-        android:text="User Name"
-        android:textSize="18dp"
+        android:text="@string/user_name"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
     <EditText
@@ -35,32 +35,37 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="35dp"
         android:drawableStart="@drawable/signature"
-        android:hint="Signature"
+        android:hint="@string/signature"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:padding="10dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/account_friends_button"
         android:layout_width="338dp"
         android:layout_height="50dp"
         android:layout_below="@+id/account_signature"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/orange"
-        android:drawableLeft="@drawable/friends"
-        android:text="Friends" />
+        android:drawableStart="@drawable/friends"
+        android:text="@string/friends"
+        android:textColor="@color/black"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/account_profile_button"
         android:layout_width="338dp"
         android:layout_height="50dp"
         android:layout_below="@+id/account_friends_button"
-        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/blue"
-        android:drawableLeft="@drawable/star"
-        android:text="Profile Page" />
+        android:drawableStart="@drawable/star"
+        android:text="@string/profile_page"
+        android:textColor="@color/black"
+        tools:ignore="TextContrastCheck" />
 
 </RelativeLayout>
