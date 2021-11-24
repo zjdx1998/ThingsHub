@@ -40,7 +40,7 @@
         android:minHeight="48dp"
         android:padding="10dp"
         android:textAlignment="center"
-        android:autofillHints="" />
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/account_friends_button"
@@ -50,7 +50,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/orange"
-        android:drawableStart="@drawable/friends"
+        android:drawableLeft="@drawable/friends"
         android:text="@string/friends"
         android:textColor="@color/black"
         tools:ignore="TextContrastCheck" />
@@ -63,7 +63,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/blue"
-        android:drawableStart="@drawable/star"
+        android:drawableLeft="@drawable/star"
         android:text="@string/profile_page"
         android:textColor="@color/black"
         tools:ignore="TextContrastCheck" />
