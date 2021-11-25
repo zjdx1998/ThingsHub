@@ -12,7 +12,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/profile"
-        app:civ_border_color="@color/blue"
+        app:civ_border_color="@color/theme_blue"
         app:civ_border_width="2dp" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/orange"
+        android:backgroundTint="@color/theme_orange"
         android:drawableLeft="@drawable/friends"
         android:text="@string/friends"
         android:textColor="@color/black"
@@ -64,7 +64,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/theme_blue"
         android:drawableLeft="@drawable/star"
         android:text="@string/profile_page"
         android:textColor="@color/black"
