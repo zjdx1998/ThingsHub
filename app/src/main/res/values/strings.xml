@@ -4,4 +4,22 @@
     <string name="friends">Friends</string>
     <string name="profile_page">Profile Page</string>
     <string name="signature">Signature</string>
+    <string name="addthingtitle">TITLE</string>
+    <string name="addthingfab">TODO</string>
+    <string name="title">Title</string>
+    <string name="FROM">TextView</string>
+    <string name="from">FROM</string>
+    <string name="to">TO</string>
+    <string name="startDate">Select StartDate Button</string>
+    <string name="endDate">Select EndDate Button</string>
+    <string name="string_enddate">Button</string>
+    <string name="dec_16_2021">Dec 16 2021</string>
+    <string name="dec_16_2022">Dec 16 2022</string>
+    <string name="color">COLOR</string>
+    <string name="thingstoday_title">ThingsToday TItle</string>
+    <string name="buttontest">Button Test</string>
+    <string name="add_thing_jump">Add Thing Jump</string>
+    <string name="empty">empty</string>
+    <string name="showTitle">Title</string>
+
 </resources>

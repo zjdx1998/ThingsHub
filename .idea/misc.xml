@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/folder.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/friends.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/history.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/profile.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/signature.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/drawable/star.xml" value="0.26979166666666665" />
+        <entry key="..\:/ThingsHub/app/src/main/res/layout/activity_account.xml" value="0.1" />
+        <entry key="..\:/ThingsHub/app/src/main/res/layout/activity_addthings.xml" value="0.1" />
+        <entry key="..\:/ThingsHub/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/ThingsHub/app/src/main/res/layout/activity_things_list.xml" value="0.264" />
+        <entry key="..\:/ThingsHub/app/src/main/res/layout/thingslist.xml" value="0.2" />
+        <entry key="..\:/ThingsHub/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26564102564102565" />
         <entry key="app/src/main/res/drawable/folder.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19907407407407407" />
@@ -15,5 +28,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>
