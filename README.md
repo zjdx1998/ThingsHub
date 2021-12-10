@@ -7,7 +7,7 @@ DB URL: [ThingsHub – Firebase console (google.com)](https://console.firebase.g
 
 ### Data Model
 
-![image-20211207211056559](README.assets/image-20211207211056559.png)
+
 
 > Database User Graph
 
@@ -34,30 +34,68 @@ Users
 public class User{
     private String userName;
     private Map<Date, List<Things>> history;
-    private List<Things> things; 
-}
-public class Date{
-    private String year;
-    private String month;
-    private String day;
+    private List<Thing> things; 
+    private List<String> friends;
+}   
+public class Date implements Comparable<Date>{
+    private int year;
+    private int month;
+    private int day;
     public String toKey(){ //==> same as toString()
         return year+"-"+month+"-"+day;
     } 
 }
-public class Things{
-    
+public class Thing {
+    private String thingsName;
+    private Date startDate;
+    private Date endDate;
+    private Boolean isCompleted;
 }
+
 ```
 
 
 
 ### API
 
-1. `createUser(userName, passWord):boolean`: create an user with password, return true if successfully created.
-2. `checkUser(userName):boolean`: check if user is valid, return true if user is valid.
-3. `changeUserNickName(userName, newNickName):void`: change user nickname with given parameter.
-4. `getThings(userName, isCompleted=False):ArrayList<Things>`: return things of given user, with filter = {is completed}
-5. `getThings(userName, isCompleted=False):ArrayList<Things>`: return things of given user, with filter = {is completed, specific date}
-6. `getThings(userName, isCompleted, startDate, endDate):ArrayList<Things>`: return things of given user, with filter = {is completed, start date, end date}
-7. `getColors(userName, date):Map<Date,String> `: get colors of user on given date, return value is a map of <date, color(string)>. 
+1. `createUser(userName):boolean`: create an user with password, return true if successfully created, return false if user was already existed.
 
+   Usage: `Server.getInstance().createUser(userName, created->{});`
+
+2. `checkUser(userName, exist):boolean`: check if user is valid, return true if user is valid.
+
+   Usage: `Server.getInstance().checkUser(userName, exist->{});`
+
+3. `addThing(Things):void` add thing to current user;
+
+   Usage: `Server.getInstance().addThing(someThing:Thing);`
+
+4. `getThings(userName):ArrayList<Things>`: return things of given user, return null if current user is not exists.
+
+   Usage: `Server.getInstance().getThings(userName, things->{});`
+
+5. `filterThings(List<Thing> things, isCompleted)`: filter all the things from given `things` that `isCompleted` is given.
+
+   Usage: `filteredThings = Server.getInstance().filterThings(things, true/false);`
+
+6. `filterThings(things, startDate)` filter all the things from given `thigns` that have an end date after given `startDate`.
+
+   Usage: `filteredThings = Server.getInstance().filterThings(things, some date);`
+
+7. `getFriends(userName, callback)`: get friends of given user.
+
+   Usage: `Server.getInstance().getFriends(userName, friends->{});`
+
+8. `addFriend(userName)`: add given user as a friend to current user.
+
+   Usage: `Server.getInstance().addFriend(userName);`
+
+9. `markCompleted(thing:Thing)`: mark some thing as done, automatically added to history
+
+   Usage: `Server.getInstance().markCompleted(thing, true/false);`
+
+10. `getHistory(userName, callback)`: get history of given user as a Map<Date, List<Thing>>;
+
+    Usage: `Server.getInstance().getHistory(userName, history->{});`
+
+11. `mixColor(things)`: mix all the colors of given `things` to one color, temporarily return as an integer. (May add hex-decimal conversion in the future)
