@@ -18,6 +18,18 @@
             android:exported="true" />
         <activity
             android:name=".FrontEnd.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddFriendActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FriendActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FrontEnd.TestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +41,6 @@
             android:name=".FrontEnd.AddThing_activity"
             android:exported="true"
             android:theme="@style/Theme.ThingsHub"/>
-
-        <activity
-            android:name=".FrontEnd.TestActivity"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
         <activity
             android:name=".FrontEnd.AccountActivity"
             android:exported="true" />
