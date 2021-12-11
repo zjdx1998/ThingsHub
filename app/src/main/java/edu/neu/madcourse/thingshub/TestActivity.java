@@ -2,12 +2,14 @@ package edu.neu.madcourse.thingshub;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import java.util.List;
 import java.util.Map;
 
+import edu.neu.madcourse.thingshub.FrontEnd.AccountActivity;
 import edu.neu.madcourse.thingshub.Model.Date;
 import edu.neu.madcourse.thingshub.Model.Thing;
 import edu.neu.madcourse.thingshub.Model.User;
@@ -31,6 +33,12 @@ public class TestActivity extends AppCompatActivity {
             testFilterThings();
             testGetFriends();//should output dyn
             testGetHistory();//should output 12-10 singing
+
+            // AccountActivity Test
+//            Intent intent = new Intent();
+//            intent.putExtra("username", "zjd");
+//            intent.setClass(TestActivity.this, AccountActivity.class);
+//            startActivity(intent);
         });
     }
 
