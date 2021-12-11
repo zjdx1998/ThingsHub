@@ -22,7 +22,7 @@ public class AddFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addnewfriends);
-        addButton=findViewById(R.id.addFriendsButton);
+        addButton=findViewById(R.id.addButton);
         editFriendname=findViewById(R.id.editTextTextFriendName);
 
         addButton.setOnClickListener(v-> {

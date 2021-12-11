@@ -31,10 +31,11 @@ public class FriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
         recyclerView=findViewById(R.id.friendsView);
+        addfriendButton=findViewById(R.id.addFriendsButton);
         friends=new ArrayList<>();
         init(savedInstanceState);
 
-        addfriendButton.setOnClickListener(view->{
+        addfriendButton.setOnClickListener(v->{
             Intent intent = new Intent();
             intent.setClass(FriendActivity.this,AddFriendActivity.class);
             startActivity(intent);
