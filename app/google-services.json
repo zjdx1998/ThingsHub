@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "59043229364",
+    "firebase_url": "https://thingshub-numda21fall-default-rtdb.firebaseio.com",
+    "project_id": "thingshub-numda21fall",
+    "storage_bucket": "thingshub-numda21fall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59043229364:android:ae06b837a627ab158fb1e1",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.thingshub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59043229364-40e0e6q4fjun4oifv4flemkus85975jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANlUk26v64nXJGLtdJREajrCY_oOl7zBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59043229364-40e0e6q4fjun4oifv4flemkus85975jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
