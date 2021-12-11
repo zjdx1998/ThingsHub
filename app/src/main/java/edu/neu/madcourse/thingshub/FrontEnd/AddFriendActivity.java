@@ -1,4 +1,4 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import edu.neu.madcourse.thingshub.Model.User;
+import edu.neu.madcourse.thingshub.R;
 import edu.neu.madcourse.thingshub.Server.Server;
 
 public class AddFriendActivity extends AppCompatActivity {
@@ -28,7 +27,7 @@ public class AddFriendActivity extends AppCompatActivity {
         addButton.setOnClickListener(v-> {
             process();
             Intent intent = new Intent();
-            intent.setClass(AddFriendActivity.this,FriendActivity.class);
+            intent.setClass(AddFriendActivity.this, FriendActivity.class);
             startActivity(intent);
 
         });
@@ -46,10 +45,23 @@ public class AddFriendActivity extends AppCompatActivity {
                     newFriendOrNotFlag=false;
                     break;
                 }
+                if(FriendName.equals(User.getInstance().getUserName())){
+                    Toast.makeText(AddFriendActivity.this,"Don't add yourself",Toast.LENGTH_SHORT).show();
+                    newFriendOrNotFlag=false;
+                    break;
+                }
             }
             if(newFriendOrNotFlag){
-                Server.getInstance().addFriend(FriendName);
-                Toast.makeText(AddFriendActivity.this,"Successfully added",Toast.LENGTH_SHORT).show();
+                Server.getInstance().checkUser(FriendName,exist -> {
+                    if(exist){
+                        Server.getInstance().addFriend(FriendName);
+                        Toast.makeText(AddFriendActivity.this,"Successfully added",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(AddFriendActivity.this,"No user named it,please check again",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
         });
