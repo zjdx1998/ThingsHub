@@ -20,16 +20,16 @@
             android:name=".FrontEnd.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".AddFriendActivity"
+            android:name=".FrontEnd.AddFriendActivity"
             android:exported="true" />
         <activity
-            android:name=".FriendActivity"
+            android:name=".FrontEnd.FriendActivity"
             android:exported="true" />
         <activity
             android:name=".FrontEnd.TestActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".FrontEnd.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

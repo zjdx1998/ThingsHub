@@ -31,6 +31,7 @@ public class ThingsList_activity extends AppCompatActivity {
     MyAdapter mMyAdapter;
     RecyclerView.LayoutManager layoutManager;
     public ArrayList<Things> itemList ;
+    private String curUserName;
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
 
@@ -63,6 +64,7 @@ public class ThingsList_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        curUserName = getIntent().getExtras().getString("UserName");
         setContentView(R.layout.activity_things_list);
         mRecyclerView = findViewById(R.id.recyclerView);
         itemList = new ArrayList<>();
@@ -78,13 +80,13 @@ public class ThingsList_activity extends AppCompatActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        Server.getInstance().getThings(User.getInstance().getUserName(), things->{
+        Server.getInstance().getThings(curUserName, things->{
             for(Thing thing : things){
                 itemList.add(new Things(thing.getThingsName(), thing.getColor()));
             }
             initialItemData(savedInstanceState);
             createRecyclerView();
-        }); //need a parameter from previous page
+        });
     }
 
     private void initialItemData(Bundle savedInstanceState) {

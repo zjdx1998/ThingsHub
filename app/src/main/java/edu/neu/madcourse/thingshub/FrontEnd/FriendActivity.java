@@ -1,4 +1,4 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import edu.neu.madcourse.thingshub.FriendRecyclerView.Friends;
 import edu.neu.madcourse.thingshub.FriendRecyclerView.MyAdapter;
 import edu.neu.madcourse.thingshub.Model.User;
+import edu.neu.madcourse.thingshub.R;
 import edu.neu.madcourse.thingshub.Server.Server;
 
 public class FriendActivity extends AppCompatActivity {
