@@ -3,8 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/NEU/21Fall/CS5520/ThingsHub/app/src/main/res/layout/activity_account.xml" value="0.33" />
-        <entry key="..\:/NEU/21Fall/CS5520/ThingsHub/app/src/main/res/layout/activity_test.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/folder.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/friends.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/history.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/star.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_account.xml" value="0.264" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_addnewfriends.xml" value="0.14990942028985507" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_friends.xml" value="0.2046875" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_login.xml" value="0.1296875" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_test.xml" value="0.1296875" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/friendslist.xml" value="0.1296875" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/login.xml" value="0.12335359675785208" />
         <entry key="app/src/main/res/drawable/folder.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19907407407407407" />
