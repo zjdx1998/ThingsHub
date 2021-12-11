@@ -7,7 +7,7 @@ import edu.neu.madcourse.thingshub.Server.Server;
 
 public class User{
     private String userName;
-    private Map<Date, List<Thing>> history;
+    private Map<String, List<Thing>> history;
     private List<Thing> things;
     private List<String> friends;
 
@@ -15,7 +15,7 @@ public class User{
         this.userName = userName;
     }
 
-    public User(String userName, Map<Date, List<Thing>> history, List<Thing> things, List<String> friends) {
+    public User(String userName, Map<String, List<Thing>> history, List<Thing> things, List<String> friends) {
         this.userName = userName;
         this.history = history;
         this.things = things;
@@ -46,11 +46,11 @@ public class User{
         this.userName = userName;
     }
 
-    public Map<Date, List<Thing>> getHistory() {
+    public Map<String, List<Thing>> getHistory() {
         return history;
     }
 
-    public void setHistory(Map<Date, List<Thing>> history) {
+    public void setHistory(Map<String, List<Thing>> history) {
         this.history = history;
     }
 

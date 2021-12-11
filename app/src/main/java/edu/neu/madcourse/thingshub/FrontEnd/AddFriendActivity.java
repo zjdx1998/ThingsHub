@@ -1,4 +1,4 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import edu.neu.madcourse.thingshub.Model.User;
+import edu.neu.madcourse.thingshub.R;
 import edu.neu.madcourse.thingshub.Server.Server;
 
 public class AddFriendActivity extends AppCompatActivity {

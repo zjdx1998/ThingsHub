@@ -1,4 +1,4 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import edu.neu.madcourse.thingshub.FrontEnd.AccountActivity;
 import edu.neu.madcourse.thingshub.Model.Date;
 import edu.neu.madcourse.thingshub.Model.Thing;
 import edu.neu.madcourse.thingshub.Model.User;
+import edu.neu.madcourse.thingshub.R;
 import edu.neu.madcourse.thingshub.Server.Server;
 
 public class TestActivity extends AppCompatActivity {
@@ -109,7 +110,7 @@ public class TestActivity extends AppCompatActivity {
     public void testGetHistory() {
         testMarkCompleted();
         Server.getInstance().getHistory("zjd",history -> {
-            for(Map.Entry<Date, List<Thing>> p : history.entrySet()){
+            for(Map.Entry<String, List<Thing>> p : history.entrySet()){
                 System.out.println(p.getKey() + "\n ------------------- \n" + p.getValue());
             }
         });
