@@ -48,11 +48,22 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
     }
-
     protected void onResume() {
+        friends=new ArrayList<>();
+        Server.getInstance().getFriends(User.getInstance().getUserName(),friendslist->{
+                     if (friendslist.size()>0){
+                        for (int i=0;i<friendslist.size();i++){
+                            Friends friend = new Friends(friendslist.get(i));
+                            friends.add(friend);
+                            myAdapter.notifyItemInserted(friends.size()-1);
+                            recyclerView.smoothScrollToPosition(friends.size()-1);
+                        }
+                    }
+                }
+        );
+        createRecyclerView();
         super.onResume();
     }
-
     private void init() {
         initialItemData();
         createRecyclerView();
