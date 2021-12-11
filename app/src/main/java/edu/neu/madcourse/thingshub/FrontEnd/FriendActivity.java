@@ -37,6 +37,7 @@ public class FriendActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(FriendActivity.this, AddFriendActivity.class);
             startActivity(intent);
+
                 });
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
@@ -46,6 +47,7 @@ public class FriendActivity extends AppCompatActivity {
                 intent.setClass(FriendActivity.this,ThingsList_activity.class);
                 startActivity(intent);
             }
+
         });
     }
     protected void onResume() {
@@ -82,9 +84,7 @@ public class FriendActivity extends AppCompatActivity {
                         recyclerView.smoothScrollToPosition(friends.size()-1);
                     }
                 }
-                    }
-                    );
-
+            });
     }
     private void createRecyclerView() {
         myAdapter = new MyAdapter(friends);

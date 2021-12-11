@@ -28,6 +28,9 @@ import edu.neu.madcourse.thingshub.Model.User;
 public class Server {
     static FirebaseDatabase database;
     public static final String DB_URL = "https://thingshub-numda21fall-default-rtdb.firebaseio.com/";
+    public static final int BKG_COLOR = 0xFFEBEDF0;
+    public static final int DES_COLOR = 0xFF9E9E9E;
+    public static final int BORDER_COLOR = 0xFF9E9E9E;
     public Server(){
         database = FirebaseDatabase.getInstance();
     }
@@ -161,7 +164,7 @@ public class Server {
         dbRef.child(date).child(thing.toKey()).setValue(thing);
     }
     public interface GetHistoryCallback{
-        void onGetHistory(Map<Date, List<Thing>> history);
+        void onGetHistory(Map<String, List<Thing>> history);
     }
     public void getHistory(String userName, GetHistoryCallback historyCB){
         checkUser(userName, exist->{
@@ -170,12 +173,12 @@ public class Server {
             }else{
                 DatabaseReference dbRef = database.getReference("/Users/"+userName+"/History");
                 dbRef.get().addOnCompleteListener(task -> {
-                    Map<Date, List<Thing>> histories = new HashMap<>();
+                    Map<String, List<Thing>> histories = new HashMap<>();
                     if(task.isSuccessful()) {
                         DataSnapshot snapshot = task.getResult();
                         if (snapshot.exists()) {
                             for (DataSnapshot historyDateSnapshot : snapshot.getChildren()) {
-                                Date date = new Date(historyDateSnapshot.getKey());
+                                String date = historyDateSnapshot.getKey();
                                 for(DataSnapshot thingSnapshot : historyDateSnapshot.getChildren()){
                                     if(histories.get(date)==null){
                                         histories.put(date, new ArrayList<>());
