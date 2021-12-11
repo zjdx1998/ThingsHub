@@ -37,6 +37,8 @@ import java.util.Map;
 
 public class AccountActivity extends AppCompatActivity {
     private Button updateButton;
+    private Button friendsButton;
+    private Button profileButton;
     private TextView username;
     private EditText userSignature;
     private CircleImageView userImage;
@@ -72,6 +74,21 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+        //go friends page
+        friendsButton.setOnClickListener(view -> {
+            Intent friendIntent = new Intent();
+            friendIntent.setClass(AccountActivity.this, FriendActivity.class);
+            startActivity(friendIntent);
+        });
+
+        //go profile page
+        profileButton.setOnClickListener(view -> {
+            Intent profileIntent = new Intent();
+            profileIntent.putExtra("UserName", userName);
+            profileIntent.setClass(AccountActivity.this, ThingsList_activity.class);
+            startActivity(profileIntent);
+        });
+
         // update user image
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +107,8 @@ public class AccountActivity extends AppCompatActivity {
         userSignature = (EditText) findViewById(R.id.account_signature);
         userImage = (CircleImageView) findViewById(R.id.account_image);
         loadingBar = new ProgressDialog(this);
+        friendsButton = findViewById(R.id.account_friends_button);
+        profileButton = findViewById(R.id.account_profile_button);
     }
 
     @Override

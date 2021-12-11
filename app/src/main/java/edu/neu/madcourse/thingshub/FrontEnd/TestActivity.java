@@ -1,4 +1,4 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import edu.neu.madcourse.thingshub.FrontEnd.AccountActivity;
 import edu.neu.madcourse.thingshub.Model.Date;
 import edu.neu.madcourse.thingshub.Model.Thing;
 import edu.neu.madcourse.thingshub.Model.User;
+import edu.neu.madcourse.thingshub.R;
 import edu.neu.madcourse.thingshub.Server.Server;
 
 public class TestActivity extends AppCompatActivity {

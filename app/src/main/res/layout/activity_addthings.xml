@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/addthingTitle"
+        android:layout_width="224dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/addthingstitle"
+        android:contentDescription="@string/addthingtitle"
+        app:layout_constraintBottom_toTopOf="@+id/inputTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/addthingstitle"
+        tools:ignore="ImageContrastCheck" />
+
+    <EditText
+        android:id="@+id/inputTitle"
+        android:layout_width="344dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="34dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:labelFor="@id/inputTitle"
+        android:text="@string/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addthingTitle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addThing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="23dp"
+        android:backgroundTint="@color/orange"
+        android:clickable="true"
+        android:contentDescription="@string/addthingfab"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/orange"
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/from"
+        app:layout_constraintBottom_toTopOf="@id/to"
+        app:layout_constraintEnd_toStartOf="@id/fromDateBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
+
+    <Button
+        android:id="@+id/fromDateBtn"
+        style="?android:spinnerStyle"
+        android:layout_width="130dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/blue"
+        android:drawableTint="@color/blue"
+        android:foregroundTint="@color/blue"
+        android:text="@string/dec_16_2021"
+        android:textColor="@color/black"
+        app:iconTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/from"
+        app:layout_constraintTop_toBottomOf="@+id/inputTitle"
+        app:rippleColor="@color/white"
+        app:strokeColor="@color/blue" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/to"
+        app:layout_constraintBottom_toTopOf="@id/COLOR"
+        app:layout_constraintEnd_toStartOf="@id/toDateBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/from" />
+
+    <Button
+        android:id="@+id/toDateBtn"
+        style="?android:spinnerStyle"
+        android:layout_width="130dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/dec_16_2022"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/to"
+        app:layout_constraintTop_toBottomOf="@id/fromDateBtn" />
+
+    <TextView
+        android:id="@+id/COLOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/to" />
+
+    <Button
+        android:id="@+id/colorPickerBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toEndOf="@id/COLOR"
+        app:layout_constraintTop_toBottomOf="@id/toDateBtn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

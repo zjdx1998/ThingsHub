@@ -2,6 +2,7 @@ package edu.neu.madcourse.thingshub.FrontEnd;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,6 @@ public class FriendActivity extends AppCompatActivity {
     MyAdapter myAdapter;
     RecyclerView.LayoutManager layoutManager;
     public ArrayList<Friends> friends;
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -32,23 +32,35 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.friendsView);
         addfriendButton=findViewById(R.id.addFriendsButton);
         friends=new ArrayList<>();
-        init(savedInstanceState);
-
+        init();
         addfriendButton.setOnClickListener(v->{
             Intent intent = new Intent();
             intent.setClass(FriendActivity.this, AddFriendActivity.class);
             startActivity(intent);
                 });
+        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent();
+                intent.putExtra("UserName",friends.get(position).getName());
+                intent.setClass(FriendActivity.this,ThingsList_activity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void init(Bundle savedInstanceState) {
-        initialItemData(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void init() {
+        initialItemData();
         createRecyclerView();
     }
 
-    private void initialItemData(Bundle savedInstanceState) {
+    private void initialItemData() {
             Server.getInstance().getFriends(User.getInstance().getUserName(),friendslist->{
-                if (friendslist==null){
+                if (friendslist==null ||friendslist.size()==0 ){
                     Toast.makeText(FriendActivity.this,"Please add some new friends",Toast.LENGTH_SHORT).show();
                 }
                 else if (friendslist.size()>0){
@@ -70,5 +82,6 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(layoutManager);
     }
+
 
 }

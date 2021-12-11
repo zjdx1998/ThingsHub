@@ -45,9 +45,10 @@ public class LoginActivity extends AppCompatActivity{
 
                 loginButton.setOnClickListener(v -> {
                         login();
-                        Intent intent = new Intent();
-                        intent.setClass(LoginActivity.this, FriendActivity.class);
                         User.setInstance(editUsername.getText().toString());
+                        Intent intent = new Intent();
+                        intent.putExtra("username", editUsername.getText().toString());
+                        intent.setClass(LoginActivity.this, AccountActivity.class);
                         startActivity(intent);
                 });
         }
