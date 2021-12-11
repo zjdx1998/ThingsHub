@@ -35,10 +35,10 @@ public class TestActivity extends AppCompatActivity {
             testGetHistory();//should output 12-10 singing
 
             // AccountActivity Test
-            Intent intent = new Intent();
-            intent.putExtra("username", "zjd");
-            intent.setClass(TestActivity.this, AccountActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent();
+//            intent.putExtra("username", "zjd");
+//            intent.setClass(TestActivity.this, AccountActivity.class);
+//            startActivity(intent);
         });
     }
 
