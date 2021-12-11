@@ -39,6 +39,7 @@ public class FriendActivity extends AppCompatActivity {
             startActivity(intent);
                 });
     }
+    @Override
 
     private void init(Bundle savedInstanceState) {
         initialItemData(savedInstanceState);
