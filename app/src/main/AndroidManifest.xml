@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.neu.madcourse.thingshub">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -13,13 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThingsHub">
         <activity
+            android:name=".FrontEnd.ThingsList_activity"
+            android:exported="true" />
+        <activity
+            android:name=".FrontEnd.MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddFriendActivity"
             android:exported="true" />
         <activity
             android:name=".FriendActivity"
             android:exported="true" />
         <activity
-            android:name=".TestActivity"
+            android:name=".FrontEnd.TestActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
@@ -30,6 +37,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FrontEnd.AddThing_activity"
+            android:exported="true"
+            android:theme="@style/Theme.ThingsHub"/>
         <activity
             android:name=".FrontEnd.AccountActivity"
             android:exported="true" />
