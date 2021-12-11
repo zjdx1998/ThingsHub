@@ -1,8 +1,6 @@
-package edu.neu.madcourse.thingshub;
+package edu.neu.madcourse.thingshub.FrontEnd;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.utils.widget.ImageFilterButton;
-import androidx.constraintlayout.utils.widget.ImageFilterView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -13,18 +11,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
+import edu.neu.madcourse.thingshub.Model.Date;
+import edu.neu.madcourse.thingshub.R;
 import top.defaults.colorpicker.ColorPickerPopup;
 
 public class AddThing_activity extends AppCompatActivity {
 
-    public static final String EXTRA_TITLE = "THINGS";
-    public static final String EXTRA_DESCRIPTION = "ADD THINGS";
+    public static final String THINGS_NAME = "thingsName";
+    public static final String START_DATE= "startDate";
+    public static final String END_DATE = "endDate";
+    public static final String IS_COMPLETED = "isCompleted";
+    public static final String COLOR = "color";
+    public static final String LONGITUDE = "longitude";
+    public static final String LATITUDE = "latitude";
+
 
     private DatePickerDialog datePickerDialog;
     private Button fromDateBtn;
@@ -44,61 +49,42 @@ public class AddThing_activity extends AppCompatActivity {
         fromDateBtn = findViewById(R.id.fromDateBtn);
         toDateBtn = findViewById(R.id.toDateBtn);
 
-        fromDateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initDatePicker(fromDateBtn);
-                openDatePicker();
-            }
+        fromDateBtn.setOnClickListener(v -> {
+            initDatePicker(fromDateBtn);
+            openDatePicker();
         });
-        fromDateBtn.setText(getTodayDate());
+        fromDateBtn.setText(getCurDate());
 
-        toDateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initDatePicker(toDateBtn);
-                openDatePicker();
-            }
+        toDateBtn.setOnClickListener(v -> {
+            initDatePicker(toDateBtn);
+            openDatePicker();
         });
-        toDateBtn.setText(getTodayDate());
+        toDateBtn.setText(getCurDate());
 
         colorPickerBtn = findViewById(R.id.colorPickerBtn);
-        colorPickerBtn.setOnClickListener(new View.OnClickListener() {
+        colorPickerBtn.setOnClickListener(view -> new ColorPickerPopup.Builder(AddThing_activity.this)
+                .initialColor(Color.BLUE)
+                .enableBrightness(true)
+                .enableAlpha(true)
+                .okTitle("CHOOSE")
+                .cancelTitle("CANCEL")
+                .showIndicator(true)
+                .showValue(true)
+                .build()
+                .show(view, new ColorPickerPopup.ColorPickerObserver() {
+                    @Override
+                    public void onColorPicked(int color) {
+                        colorPicked = color;
+                        System.out.println(colorPicked);
+                        colorPickerBtn.setBackgroundColor(color);
 
-            @Override
-            public void onClick(View view) {
-                new ColorPickerPopup.Builder(AddThing_activity.this)
-                        .initialColor(Color.BLUE)
-                        .enableBrightness(true)
-                        .enableAlpha(true)
-                        .okTitle("CHOOSE")
-                        .cancelTitle("CANCEL")
-                        .showIndicator(true)
-                        .showValue(true)
-                        .build()
-                        .show(view, new ColorPickerPopup.ColorPickerObserver() {
-                            @Override
-                            public void onColorPicked(int color) {
-                                colorPicked = color;
-                                System.out.println(colorPicked);
-                                colorPickerBtn.setBackgroundColor(color);
-
-                            }
-                        });
-
-            }
-        });
+                    }
+                }));
 
         inputTitle = findViewById(R.id.inputTitle);
         fab = findViewById(R.id.addThing);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                enterThings();
-            }
-        });
+        fab.setOnClickListener(view -> enterThings());
 
     }
 
@@ -108,11 +94,23 @@ public class AddThing_activity extends AppCompatActivity {
 
         if (!title.isEmpty() || title == null ) {
             Intent data = new Intent();
-            data.putExtra(EXTRA_TITLE, title);
-            data.putExtra(EXTRA_DESCRIPTION, Integer.toString(colorPicked));
+            data.putExtra(THINGS_NAME, title);
+            data.putExtra(START_DATE, fromDateBtn.getText().toString());
+            data.putExtra(END_DATE, toDateBtn.getText().toString());
+            data.putExtra(IS_COMPLETED, false);
+            data.putExtra(COLOR, colorPicked);
             setResult(RESULT_OK, data);
             finish();
         }
+    }
+
+    private String getCurDate(){
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return (new Date(year,month,day)).toKey();
     }
 
     private String getTodayDate() {

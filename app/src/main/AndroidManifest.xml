@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThingsHub">
         <activity
-            android:name=".ThingsList_activity"
+            android:name=".FrontEnd.ThingsList_activity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".FrontEnd.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,18 +23,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddThing_activity"
-            android:exported="true" />
+            android:name=".FrontEnd.AddThing_activity"
+            android:exported="true"
+            android:theme="@style/Theme.ThingsHub"/>
 
-        android:theme="@style/Theme.ThingsHub">
         <activity
-            android:name=".TestActivity"
+            android:name=".FrontEnd.TestActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
