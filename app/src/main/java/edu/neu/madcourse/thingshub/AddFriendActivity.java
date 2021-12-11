@@ -49,6 +49,7 @@ public class AddFriendActivity extends AppCompatActivity {
             }
             if(newFriendOrNotFlag){
                 Server.getInstance().addFriend(FriendName);
+                Toast.makeText(AddFriendActivity.this,"Successfully added",Toast.LENGTH_SHORT).show();
             }
 
         });
