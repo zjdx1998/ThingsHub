@@ -3,19 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/NEU/21Fall/CS5520/ThingsHub/app/src/main/res/layout/activity_things_list.xml" value="0.12359550561797752" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/drawable/friends.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_addnewfriends.xml" value="0.19610507246376813" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_friends.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/activity_things_list.xml" value="0.1947463768115942" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/friendslist.xml" value="0.19610507246376813" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/ThingsHub/app/src/main/res/layout/thingslist.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/drawable/folder.xml" value="0.40520833333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/activity_addthings.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_things_list.xml" value="0.25" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

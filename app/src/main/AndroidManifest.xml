@@ -14,16 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThingsHub">
         <activity
-            android:name=".FrontEnd.ThingsList_activity"
-            android:exported="true" />
-        <activity
-            android:name=".FrontEnd.MainActivity"
-            android:exported="true" />
-        <activity
+
             android:name=".FrontEnd.AddFriendActivity"
             android:exported="true" />
         <activity
             android:name=".FrontEnd.FriendActivity"
+            android:exported="true"/>
+        <activity
+
+            android:name=".FrontEnd.ThingsList_activity"
+            android:exported="true" />
+        <activity
+            android:name=".FrontEnd.MainActivity"
+
             android:exported="true" />
         <activity
             android:name=".FrontEnd.TestActivity"
