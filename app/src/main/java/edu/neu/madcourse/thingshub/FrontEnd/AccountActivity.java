@@ -1,5 +1,6 @@
 package edu.neu.madcourse.thingshub.FrontEnd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.neu.madcourse.thingshub.Model.User;
 import edu.neu.madcourse.thingshub.R;
 
 import androidx.annotation.NonNull;
@@ -35,6 +37,8 @@ public class AccountActivity extends AppCompatActivity {
 
     private DatabaseReference RootRef;
 
+    private static final int PICTURE_NUM = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,9 @@ public class AccountActivity extends AppCompatActivity {
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         initializeFields();
+        getUserProfile();
 
+        // update signature
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +60,20 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        getUserProfile();
+        // update user image
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pictureIntent = new Intent();
+                pictureIntent.setAction(Intent.ACTION_GET_CONTENT);
+                pictureIntent.setType("image/*");
+                startActivityForResult(pictureIntent, PICTURE_NUM);
+            }
+        });
     }
 
     private void initializeFields() {
+        username = (TextView) findViewById(R.id.account_name);
         updateButton = (Button) findViewById(R.id.account_update_button);
         userSignature = (EditText) findViewById(R.id.account_signature);
         userImage = (CircleImageView) findViewById(R.id.account_image);
@@ -70,9 +86,10 @@ public class AccountActivity extends AppCompatActivity {
         profileMap.put("Signature", setUserSignature);
 
         // TODO: think about how to structure signature entry
-        //  either Users -> Tom -> Signature
+        //  either Users -> Tom -> Signature (currently using this)
         //  or     Users -> Tom -> Profile -> signature & image
-        RootRef.child("Users").child(userName).setValue(profileMap)
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("/Users/"+ userName + "/Signature");
+        dbRef.setValue(setUserSignature)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
