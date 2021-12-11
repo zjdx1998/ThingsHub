@@ -144,9 +144,9 @@ public class Server {
         checkUser(userName, exist->{
             if(exist){
                 DatabaseReference dbRef = database.getReference("/Users/"+User.getInstance().getUserName()+"/Friends");
-                dbRef.push().setValue(userName);
+                dbRef.child(userName).setValue(userName);
                 dbRef = database.getReference("/Users/"+userName+"/Friends");
-                dbRef.push().setValue(User.getInstance().getUserName());
+                dbRef.child(User.getInstance().getUserName()).setValue(User.getInstance().getUserName());
                 if(!User.getInstance().getFriends().contains(userName)) User.getInstance().getFriends().add(userName);
             }
         });
