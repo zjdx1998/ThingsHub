@@ -110,7 +110,7 @@ public class TestActivity extends AppCompatActivity {
     public void testGetHistory() {
         testMarkCompleted();
         Server.getInstance().getHistory("zjd",history -> {
-            for(Map.Entry<Date, List<Thing>> p : history.entrySet()){
+            for(Map.Entry<String, List<Thing>> p : history.entrySet()){
                 System.out.println(p.getKey() + "\n ------------------- \n" + p.getValue());
             }
         });

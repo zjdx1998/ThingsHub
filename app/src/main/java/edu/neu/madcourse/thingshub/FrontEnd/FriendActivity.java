@@ -38,7 +38,7 @@ public class FriendActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(FriendActivity.this,AddFriendActivity.class);
             startActivity(intent);
-                });
+        });
     }
 
     private void init(Bundle savedInstanceState) {
@@ -59,9 +59,7 @@ public class FriendActivity extends AppCompatActivity {
                         recyclerView.smoothScrollToPosition(friends.size()-1);
                     }
                 }
-                    }
-                    );
-
+            });
     }
     private void createRecyclerView() {
         myAdapter = new MyAdapter(friends);

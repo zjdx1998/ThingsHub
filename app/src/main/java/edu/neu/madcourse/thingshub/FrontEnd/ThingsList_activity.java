@@ -14,8 +14,13 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.hancher.contribution.ContributionConfig;
+import com.hancher.contribution.ContributionItem;
+import com.hancher.contribution.ContributionView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import edu.neu.madcourse.thingshub.Model.Date;
 import edu.neu.madcourse.thingshub.Model.Thing;
@@ -31,6 +36,7 @@ public class ThingsList_activity extends AppCompatActivity {
     MyAdapter mMyAdapter;
     RecyclerView.LayoutManager layoutManager;
     public ArrayList<Things> itemList ;
+    private ContributionView myView;
     private String curUserName;
     private static final String KEY_OF_INSTANCE = "KEY_OF_INSTANCE";
     private static final String NUMBER_OF_ITEMS = "NUMBER_OF_ITEMS";
@@ -68,7 +74,7 @@ public class ThingsList_activity extends AppCompatActivity {
         setContentView(R.layout.activity_things_list);
         mRecyclerView = findViewById(R.id.recyclerView);
         itemList = new ArrayList<>();
-
+        myView = findViewById(R.id.contributionView);
         init(savedInstanceState);
 
         fab = findViewById(R.id.addThingTab);
@@ -76,6 +82,38 @@ public class ThingsList_activity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(ThingsList_activity.this,AddThing_activity.class);
             launchSomeActivity.launch(intent);
+        });
+        initCalendar();
+    }
+
+    private void initCalendar() {
+        List<ContributionItem> data = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR)-1, calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        java.util.Date startDate = calendar.getTime();
+        Server.getInstance().getHistory(curUserName, history -> {
+            System.out.println(history);
+            for (int i = 0; i < 365; i++) {
+                ContributionItem curItem = new ContributionItem(calendar.getTime(), 0);
+                Date curDate = new Date(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
+                List<Thing> things = history.get(curDate.toKey());
+                System.out.println(curDate + " ," + things);
+                if(curDate.toKey().equals("2021-11-13")){
+                    System.out.println("found!");
+                }
+                if(things!=null && !things.isEmpty()){
+                    curItem.setColor(Server.getInstance().mixColor(things));
+                }
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                data.add(curItem);
+            }
+            ContributionConfig newConfig = new ContributionConfig();
+            newConfig.setBorderColor(Server.BORDER_COLOR);
+            int[] rkColor = new int[]{Server.BKG_COLOR};
+            newConfig.setRankColor(rkColor);
+            newConfig.setTxtColor(Server.DES_COLOR);
+            myView.setData(startDate, data, newConfig);
         });
     }
 

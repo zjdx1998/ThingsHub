@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ThingsHub"
 include ':app'
+include ':contribution'
