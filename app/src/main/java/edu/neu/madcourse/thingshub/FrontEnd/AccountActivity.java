@@ -55,6 +55,8 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void initializeFields() {
+        updateButton = (Button) findViewById(R.id.account_update_button);
+
         userName = (TextView) findViewById(R.id.account_name);
         userName.setText(name);
 
@@ -71,6 +73,7 @@ public class AccountActivity extends AppCompatActivity {
         Map<String, String> profileMap = new HashMap<>();
         profileMap.put("signature", setUserSignature);
 
+        // TODO: need to add "Profile" entry in DB
         RootRef.child("Users").child(setUserName).child("Profile").setValue(profileMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -91,5 +94,7 @@ public class AccountActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // TODO: need to add update profile image
     }
 }
