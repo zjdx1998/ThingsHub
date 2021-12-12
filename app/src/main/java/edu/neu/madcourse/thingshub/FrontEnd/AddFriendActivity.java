@@ -29,16 +29,17 @@ public class AddFriendActivity extends AppCompatActivity {
 
         addButton.setOnClickListener(v-> {
             process();
-//            TimerTask task = new TimerTask() {
-//                @Override
-//                public void run() {
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
                     Intent intent = new Intent();
                     intent.setClass(AddFriendActivity.this, FriendActivity.class);
                     startActivity(intent);
-//                }
-//            };
-//            Timer timer = new Timer();
-//            timer.schedule(task,500);
+                }
+            };
+            Timer timer = new Timer();
+            timer.schedule(task,500);
         });
 
     }

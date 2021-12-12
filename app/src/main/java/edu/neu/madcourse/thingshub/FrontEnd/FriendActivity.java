@@ -32,63 +32,38 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.friendsView);
         addfriendButton=findViewById(R.id.addFriendsButton);
         friends=new ArrayList<>();
-        init();
+        createRecyclerView();
         addfriendButton.setOnClickListener(v->{
             Intent intent = new Intent();
             intent.setClass(FriendActivity.this, AddFriendActivity.class);
             startActivity(intent);
-
-                });
-        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent();
-                intent.putExtra("UserName",friends.get(position).getName());
-                intent.setClass(FriendActivity.this,ThingsList_activity.class);
-                startActivity(intent);
-            }
-
+        });
+        myAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra("UserName",friends.get(position).getName());
+            intent.setClass(FriendActivity.this,ThingsList_activity.class);
+            startActivity(intent);
         });
     }
 
 
 
     protected void onResume() {
-        friends=new ArrayList<>();
-        Server.getInstance().getFriends(User.getInstance().getUserName(),friendslist->{
-                     if (friendslist.size()>0){
-                        for (int i=0;i<friendslist.size();i++){
-                            Friends friend = new Friends(friendslist.get(i));
-                            friends.add(friend);
-                            myAdapter.notifyItemInserted(friends.size()-1);
-                            recyclerView.smoothScrollToPosition(friends.size()-1);
-                        }
-                    }
-                }
-        );
-        createRecyclerView();
         super.onResume();
-    }
-    private void init() {
-        initialItemData();
+        friends=new ArrayList<>();
         createRecyclerView();
+        Server.getInstance().getFriends(User.getInstance().getUserName(),friendslist->{
+            if (friendslist.size()>0){
+                for (int i=0;i<friendslist.size();i++){
+                    Friends friend = new Friends(friendslist.get(i));
+                    friends.add(friend);
+                    myAdapter.notifyItemInserted(friends.size()-1);
+                    recyclerView.smoothScrollToPosition(friends.size()-1);
+                }
+            }
+        });
     }
 
-    private void initialItemData() {
-            Server.getInstance().getFriends(User.getInstance().getUserName(),friendslist->{
-                if (friendslist==null ||friendslist.size()==0 ){
-                    Toast.makeText(FriendActivity.this,"Please add some new friends",Toast.LENGTH_SHORT).show();
-                }
-                else if (friendslist.size()>0){
-                    for (int i=0;i<friendslist.size();i++){
-                        Friends friend = new Friends(friendslist.get(i));
-                        friends.add(friend);
-                        myAdapter.notifyItemInserted(friends.size()-1);
-                        recyclerView.smoothScrollToPosition(friends.size()-1);
-                    }
-                }
-            });
-    }
     private void createRecyclerView() {
         myAdapter = new MyAdapter(friends);
         layoutManager = new LinearLayoutManager(this);
