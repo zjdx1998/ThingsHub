@@ -117,6 +117,7 @@ public class ThingsList_activity extends AppCompatActivity {
 
     private void init(Bundle savedInstanceState) {
         Server.getInstance().getThings(curUserName, things->{
+            if(things==null) return;
             for(Thing thing : things){
                 itemList.add(new Things(thing.getThingsName(), thing.getColor()));
             }

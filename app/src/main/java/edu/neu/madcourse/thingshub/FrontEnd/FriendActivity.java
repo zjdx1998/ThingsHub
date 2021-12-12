@@ -38,12 +38,6 @@ public class FriendActivity extends AppCompatActivity {
             intent.setClass(FriendActivity.this, AddFriendActivity.class);
             startActivity(intent);
         });
-        myAdapter.setOnItemClickListener((view, position) -> {
-            Intent intent = new Intent();
-            intent.putExtra("UserName",friends.get(position).getName());
-            intent.setClass(FriendActivity.this,ThingsList_activity.class);
-            startActivity(intent);
-        });
     }
 
 
@@ -70,6 +64,12 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(layoutManager);
+        myAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra("UserName",friends.get(position).getName());
+            intent.setClass(FriendActivity.this,ThingsList_activity.class);
+            startActivity(intent);
+        });
     }
 
 
