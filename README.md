@@ -3,6 +3,20 @@ Final Project for CS5520
 
 
 
+## Introduction
+
+ThingsHub is an mobile software that can track everything of everyday via 'Things Calendar'.
+
+## Contributor
+
+Yaning Ding: 25%
+
+Yiman Liu: 25%
+
+Zixin Zhao: 25%
+
+Jiandong Zhang : 25%
+
 ## Functionality
 
 1. Login Page
