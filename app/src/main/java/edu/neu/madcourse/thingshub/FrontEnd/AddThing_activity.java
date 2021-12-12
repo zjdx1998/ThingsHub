@@ -54,7 +54,7 @@ public class AddThing_activity extends AppCompatActivity implements LocationList
     private EditText inputTitle;
     private FloatingActionButton fab;
     public String title;
-    public int colorPicked;
+    public int colorPicked = Server.BKG_COLOR;
     private double longitude = -122.33739;
     private double latitude = 47.62288;
     LocationManager locationManager;
