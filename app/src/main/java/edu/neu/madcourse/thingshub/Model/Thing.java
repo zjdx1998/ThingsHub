@@ -6,6 +6,18 @@ public class Thing {
     private Date endDate;
     private Boolean isCompleted;
     private int color;
+    private double longitude;
+    private double latitude;
+
+    public Thing(String thingsName, Date startDate, Date endDate, Boolean isCompleted, int color, double longitude, double latitude) {
+        this.thingsName = thingsName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isCompleted = isCompleted;
+        this.color = color;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public Thing(String thingsName, Date startDate, Date endDate, Boolean isCompleted, int color) {
         this.thingsName = thingsName;
@@ -15,6 +27,24 @@ public class Thing {
         this.color = color;
     }
     public Thing(){}
+
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
 
     public String toKey(){return getThingsName();}
 
