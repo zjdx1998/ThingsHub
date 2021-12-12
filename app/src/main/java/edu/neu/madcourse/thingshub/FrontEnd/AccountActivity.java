@@ -18,8 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +52,7 @@ public class AccountActivity extends AppCompatActivity {
 
     private DatabaseReference RootRef;
     private StorageReference userImageRef;
+    private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     private Uri imageUri;
 
@@ -62,6 +68,10 @@ public class AccountActivity extends AppCompatActivity {
 
         RootRef = FirebaseDatabase.getInstance().getReference();
         userImageRef = FirebaseStorage.getInstance().getReference().child("User Images");
+
+        // Enable sign in anonymously in case sign in error
+        mAuth = FirebaseAuth.getInstance();
+        signInAnonymously();
 
         initializeFields();
         getUserProfile();
@@ -101,6 +111,19 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
+    private void signInAnonymously() {
+        mAuth.signInAnonymously().addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                // Continue
+            }
+        }).addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                    }
+                });
+    }
+
     private void initializeFields() {
         username = (TextView) findViewById(R.id.account_name);
         updateButton = (Button) findViewById(R.id.account_update_button);
@@ -136,54 +159,62 @@ public class AccountActivity extends AppCompatActivity {
 
                 Uri resultUri = result.getUri();
                 final StorageReference filePath = userImageRef.child(userName + ".jpg");
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+                filePath.putFile(resultUri).continueWith(new Continuation<UploadTask.TaskSnapshot, Object>() {
                     @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    public Object then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (task.isSuccessful()) {
-                            Toast.makeText(
-                                    AccountActivity.this,
-                                    "Image upload successfully!",
-                                    Toast.LENGTH_SHORT)
-                                    .show();
+                            filePath.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        final String downloadedUrl = task.getResult().toString();
+                                        System.out.println("URL is...");
+                                        System.out.println(downloadedUrl);
 
-                            // TODO: debug for a valid image url
-                            final String downloadedUrl = filePath.getDownloadUrl().toString();
-
-                            System.out.println("URL is...");
-                            System.out.println(downloadedUrl);
-
-                            RootRef.child("Users").child(userName).child("Image")
-                                    .setValue(downloadedUrl)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(
-                                                        AccountActivity.this,
-                                                        "Image save successfully!",
-                                                        Toast.LENGTH_SHORT)
-                                                        .show();
-                                            } else {
-                                                String error = task.getException().toString();
-                                                Toast.makeText(
-                                                        AccountActivity.this,
-                                                        "error: " + error,
-                                                        Toast.LENGTH_SHORT)
-                                                        .show();
-                                            }
-                                            loadingBar.dismiss();
-                                        }
-                                    });
-
+                                        RootRef.child("Users").child(userName).child("Image")
+                                                .setValue(downloadedUrl)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(
+                                                                    AccountActivity.this,
+                                                                    "Image save successfully!",
+                                                                    Toast.LENGTH_SHORT)
+                                                                    .show();
+                                                        } else {
+                                                            String error = task.getException().toString();
+                                                            Toast.makeText(
+                                                                    AccountActivity.this,
+                                                                    "Save image error: " + error,
+                                                                    Toast.LENGTH_SHORT)
+                                                                    .show();
+                                                        }
+                                                        loadingBar.dismiss();
+                                                    }
+                                                });
+                                    } else {
+                                        String error = task.getException().toString();
+                                        Toast.makeText(
+                                                AccountActivity.this,
+                                                "Download image error: " + error,
+                                                Toast.LENGTH_SHORT)
+                                                .show();
+                                        loadingBar.dismiss();
+                                    }
+                                }
+                            });
                         } else {
                             String error = task.getException().toString();
                             Toast.makeText(
                                     AccountActivity.this,
-                                    "error: " + error,
+                                    "Upload image error: " + error,
                                     Toast.LENGTH_SHORT)
                                     .show();
                             loadingBar.dismiss();
                         }
+                        return null;
                     }
                 });
             }
@@ -196,9 +227,6 @@ public class AccountActivity extends AppCompatActivity {
         Map<String, String> profileMap = new HashMap<>();
         profileMap.put("Signature", setUserSignature);
 
-        // TODO: think about how to structure signature entry
-        //  either Users -> Tom -> Signature (currently using this)
-        //  or     Users -> Tom -> Profile -> signature & image
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("/Users/"+ userName + "/Signature");
         dbRef.setValue(setUserSignature)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -220,8 +248,6 @@ public class AccountActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // TODO: need to add update profile image
     }
 
     private void getUserProfile() {
@@ -234,7 +260,7 @@ public class AccountActivity extends AppCompatActivity {
                                 String retrieveSignature = snapshot.child("Signature").getValue().toString();
                                 userSignature.setText(retrieveSignature);
                             }
-                            if (snapshot.hasChild("Image")) {
+                            if (snapshot.hasChild("Image") && !snapshot.child("Image").getValue().toString().isEmpty()) {
                                 String retrieveImage = snapshot.child("Image").getValue().toString();
                                 System.out.println("image is");
                                 System.out.println(retrieveImage);
@@ -246,7 +272,6 @@ public class AccountActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
     }
