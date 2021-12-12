@@ -55,6 +55,7 @@ public class AccountActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     private Uri imageUri;
+    ValueEventListener valueEventListener;
 
     private static final int PICTURE_NUM = 1;
 
@@ -74,7 +75,6 @@ public class AccountActivity extends AppCompatActivity {
         signInAnonymously();
 
         initializeFields();
-        getUserProfile();
 
         // update signature
         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -169,8 +169,6 @@ public class AccountActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         final String downloadedUrl = task.getResult().toString();
-                                        System.out.println("URL is...");
-                                        System.out.println(downloadedUrl);
 
                                         RootRef.child("Users").child(userName).child("Image")
                                                 .setValue(downloadedUrl)
@@ -252,7 +250,7 @@ public class AccountActivity extends AppCompatActivity {
 
     private void getUserProfile() {
         RootRef.child("Users").child(userName)
-                .addValueEventListener(new ValueEventListener() {
+                .addValueEventListener(valueEventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -262,8 +260,6 @@ public class AccountActivity extends AppCompatActivity {
                             }
                             if (snapshot.hasChild("Image") && !snapshot.child("Image").getValue().toString().isEmpty()) {
                                 String retrieveImage = snapshot.child("Image").getValue().toString();
-                                System.out.println("image is");
-                                System.out.println(retrieveImage);
                                 Picasso.get().load(retrieveImage).into(userImage);
                             }
                         }
@@ -274,5 +270,17 @@ public class AccountActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        RootRef.child("Users").child(userName).removeEventListener(valueEventListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserProfile();
     }
 }
