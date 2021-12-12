@@ -30,4 +30,5 @@
     <string name="LoginOrCreate">Login/Create</string>
     <string name="todo">TODO</string>
     <string name="add">Add</string>
+    <string name="back">Back</string>
 </resources>
