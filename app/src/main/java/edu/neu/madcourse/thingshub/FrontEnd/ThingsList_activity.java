@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -117,6 +118,12 @@ public class ThingsList_activity extends AppCompatActivity {
                 return false;
             }
         });
+        HorizontalScrollView horizontalScrollView = findViewById(R.id.scrollView);
+//        if(horizontalScrollView!=null) {
+//            horizontalScrollView.postDelayed(() -> {
+//                horizontalScrollView.fullScroll(View.FOCUS_RIGHT);
+//            }, 100);
+//        }
     }
 
     @Override
