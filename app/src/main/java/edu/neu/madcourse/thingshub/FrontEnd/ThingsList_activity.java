@@ -59,7 +59,9 @@ public class ThingsList_activity extends AppCompatActivity {
                                 new Date(data.getStringExtra(AddThing_activity.START_DATE)),
                                 new Date(data.getStringExtra(AddThing_activity.END_DATE)),
                                 false,
-                                color
+                                color,
+                                data.getDoubleExtra(AddThing_activity.LONGITUDE, -122.33739),
+                                data.getDoubleExtra(AddThing_activity.LATITUDE, 47.62288)
                         ));
                         Snackbar.make(findViewById(R.id.addThingTab),
                                 "The link was successfully added", Snackbar.LENGTH_SHORT).show();
@@ -98,10 +100,6 @@ public class ThingsList_activity extends AppCompatActivity {
                 ContributionItem curItem = new ContributionItem(calendar.getTime(), 0);
                 Date curDate = new Date(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
                 List<Thing> things = history.get(curDate.toKey());
-                System.out.println(curDate + " ," + things);
-                if(curDate.toKey().equals("2021-11-13")){
-                    System.out.println("found!");
-                }
                 if(things!=null && !things.isEmpty()){
                     curItem.setColor(Server.getInstance().mixColor(things));
                 }
