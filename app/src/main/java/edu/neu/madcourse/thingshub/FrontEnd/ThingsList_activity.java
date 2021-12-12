@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -87,6 +91,39 @@ public class ThingsList_activity extends AppCompatActivity {
             launchSomeActivity.launch(intent);
         });
         initCalendar();
+        GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                super.onLongPress(e);
+                View childView = mRecyclerView.findChildViewUnder(e.getX(), e.getY());
+                if (childView != null) {
+                    int position = mRecyclerView.getChildLayoutPosition(childView);
+                    Server.getInstance().markCompleted(itemList.get(position).getName());
+                    itemList.remove(position);
+                    mMyAdapter.notifyItemRemoved(position);
+                    Toast.makeText(ThingsList_activity.this,"Mark as completed!",Toast.LENGTH_SHORT).show();
+                    initCalendar();
+                }
+            }
+        });
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                if (mGestureDetector.onTouchEvent(e)) {
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        createRecyclerView();
+        initCalendar();
     }
 
     private void initCalendar() {
@@ -119,6 +156,7 @@ public class ThingsList_activity extends AppCompatActivity {
     private void init(Bundle savedInstanceState) {
         Server.getInstance().getThings(curUserName, things->{
             if(things==null) return;
+            things = Server.getInstance().filterThings(things, false);
             for(Thing thing : things){
                 itemList.add(new Things(thing.getThingsName(), thing.getColor()));
             }
@@ -149,5 +187,7 @@ public class ThingsList_activity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mMyAdapter);
         mRecyclerView.setLayoutManager(layoutManager);
+//        mMyAdapter.setOnItemLongClickListener((view, position) -> {
+//        });
     }
 }

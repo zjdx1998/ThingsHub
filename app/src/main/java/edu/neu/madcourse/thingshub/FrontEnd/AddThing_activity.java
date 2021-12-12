@@ -54,9 +54,9 @@ public class AddThing_activity extends AppCompatActivity implements LocationList
     private EditText inputTitle;
     private FloatingActionButton fab;
     public String title;
-    public int colorPicked;
-    private double longitude;
-    private double latitude;
+    public int colorPicked = Server.BKG_COLOR;
+    private double longitude = -122.33739;
+    private double latitude = 47.62288;
     LocationManager locationManager;
 
 
@@ -208,7 +208,8 @@ public class AddThing_activity extends AppCompatActivity implements LocationList
     }
 
     private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + " " + year;
+        //return getMonthFormat(month) + " " + day + " " + year;
+        return (new Date(year, month, day)).toKey();
     }
 
     private String getMonthFormat(int month) {
