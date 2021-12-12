@@ -18,6 +18,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     List<Things> thingsList = new ArrayList<>();
     private Context context;
 
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view,int position);
+    }
+    private OnItemLongClickListener  onItemLongClickListener;
+
+    public void setOnItemLongClickListener(OnItemLongClickListener  onItemClickListener){
+        this.onItemLongClickListener=onItemClickListener;
+    }
+
     public MyAdapter(List<Things> thingsList, Context context) {
         this.thingsList = thingsList;
         this.context = context;

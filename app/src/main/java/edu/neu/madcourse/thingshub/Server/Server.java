@@ -169,6 +169,23 @@ public class Server {
         dbRef = database.getReference("/Users/"+User.getInstance().getUserName()+"/History");
         dbRef.child(date).child(thing.toKey()).setValue(thing);
     }
+
+    public void markCompleted(String thingName){
+        DatabaseReference dbRef = database.getReference("/Users/" + User.getInstance().getUserName() + "/Things");
+        DatabaseReference[] finalDbRef = {dbRef};
+        dbRef.child(thingName).get().addOnCompleteListener(task ->{
+            if(!task.isSuccessful()) return;
+            Thing thing = task.getResult().getValue(Thing.class);
+            thing.setCompleted(true);
+            finalDbRef[0].child(thingName).setValue(thing);
+            //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String date = thing.getEndDate().toKey();//df.format(Calendar.getInstance().getTime());
+            finalDbRef[0] = database.getReference("/Users/"+User.getInstance().getUserName()+"/History");
+            finalDbRef[0].child(date).child(thing.toKey()).setValue(thing);
+        });
+
+    }
+
     public interface GetHistoryCallback{
         void onGetHistory(Map<String, List<Thing>> history);
     }
@@ -199,12 +216,36 @@ public class Server {
             }
         });
     }
+
+    int blend( int i1, int i2, double ratio ) {
+        if ( ratio > 1f ) ratio = 1f;
+        else if ( ratio < 0f ) ratio = 0f;
+        double iRatio = 1.0f - ratio;
+
+        int a1 = (i1 >> 24 & 0xff);
+        int r1 = ((i1 & 0xff0000) >> 16);
+        int g1 = ((i1 & 0xff00) >> 8);
+        int b1 = (i1 & 0xff);
+
+        int a2 = (i2 >> 24 & 0xff);
+        int r2 = ((i2 & 0xff0000) >> 16);
+        int g2 = ((i2 & 0xff00) >> 8);
+        int b2 = (i2 & 0xff);
+
+        int a = (int)((a1 * iRatio) + (a2 * ratio));
+        int r = (int)((r1 * iRatio) + (r2 * ratio));
+        int g = (int)((g1 * iRatio) + (g2 * ratio));
+        int b = (int)((b1 * iRatio) + (b2 * ratio));
+
+        return  a << 24 | r << 16 | g << 8 | b ;
+    }
+
     public int mixColor(List<Thing> things){
-        int ans = 0;
+        int ans = Server.BKG_COLOR;
         for(Thing thing : things){
-            ans += thing.getColor();
+            ans = blend(ans, thing.getColor(), 0.5);
         }
-        return ans / things.size();
+        return ans;
     }
 
     public String getAddress(Context ctx, @NonNull Location location){
