@@ -81,6 +81,7 @@ public class ThingsList_activity extends AppCompatActivity {
 
         fab = findViewById(R.id.addThingTab);
         fab.setOnClickListener(view -> {
+            if(!curUserName.equals(User.getInstance().getUserName())) return;
             Intent intent = new Intent();
             intent.setClass(ThingsList_activity.this,AddThing_activity.class);
             launchSomeActivity.launch(intent);

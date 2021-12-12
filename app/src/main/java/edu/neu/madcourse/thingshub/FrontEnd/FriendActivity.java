@@ -67,8 +67,10 @@ public class FriendActivity extends AppCompatActivity {
         myAdapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent();
             intent.putExtra("UserName",friends.get(position).getName());
-            intent.setClass(FriendActivity.this,ThingsList_activity.class);
-            startActivity(intent);
+            Server.getInstance().checkUser(friends.get(position).getName(), exist->{
+                intent.setClass(FriendActivity.this,ThingsList_activity.class);
+                startActivity(intent);
+            });
         });
     }
 
