@@ -1,29 +1,44 @@
 package edu.neu.madcourse.thingshub.FrontEnd;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import edu.neu.madcourse.thingshub.Model.Date;
 import edu.neu.madcourse.thingshub.R;
+import edu.neu.madcourse.thingshub.Server.Server;
 import top.defaults.colorpicker.ColorPickerPopup;
 
-public class AddThing_activity extends AppCompatActivity {
+public class AddThing_activity extends AppCompatActivity implements LocationListener {
 
     public static final String THINGS_NAME = "thingsName";
-    public static final String START_DATE= "startDate";
+    public static final String START_DATE = "startDate";
     public static final String END_DATE = "endDate";
     public static final String IS_COMPLETED = "isCompleted";
     public static final String COLOR = "color";
@@ -35,10 +50,14 @@ public class AddThing_activity extends AppCompatActivity {
     private Button fromDateBtn;
     private Button toDateBtn;
     private Button colorPickerBtn;
+    private Button getPositionBtn;
     private EditText inputTitle;
     private FloatingActionButton fab;
     public String title;
     public int colorPicked;
+    private double longitude;
+    private double latitude;
+    LocationManager locationManager;
 
 
     @Override
@@ -85,7 +104,49 @@ public class AddThing_activity extends AppCompatActivity {
         fab = findViewById(R.id.addThing);
 
         fab.setOnClickListener(view -> enterThings());
+        getPositionBtn = findViewById(R.id.getLocation);
+        getPositionBtn.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(AddThing_activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(AddThing_activity.this, new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                }, 100);
+            }
+            getLocation();
+        });
+    }
 
+    private void getLocation() {
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 5000, 5, AddThing_activity.this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        Toast.makeText(this, ""+location.getLatitude()+" , " + location.getLongitude(), Toast.LENGTH_LONG);
+        try{
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            TextView locationText = findViewById(R.id.locationText);
+            locationText.setText(Server.getInstance().getAddress(this, location));
+            Log.d("test",Server.getInstance().getAddress(this, location));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void enterThings() {
@@ -99,6 +160,8 @@ public class AddThing_activity extends AppCompatActivity {
             data.putExtra(END_DATE, toDateBtn.getText().toString());
             data.putExtra(IS_COMPLETED, false);
             data.putExtra(COLOR, colorPicked);
+            data.putExtra(LONGITUDE, longitude);
+            data.putExtra(LATITUDE, latitude);
             setResult(RESULT_OK, data);
             finish();
         }

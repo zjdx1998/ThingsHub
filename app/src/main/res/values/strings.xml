@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ThingsHub</string>
     <string name="user_name">User Name</string>
+    <string name="RecPos">Record Position Here</string>
     <string name="friendName">Friend Name</string>
     <string name="friends">Friends</string>
     <string name="addFriends">Add Friends</string>
@@ -29,4 +30,5 @@
     <string name="LoginOrCreate">Login/Create</string>
     <string name="todo">TODO</string>
     <string name="add">Add</string>
+    <string name="back">Back</string>
 </resources>

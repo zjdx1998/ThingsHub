@@ -99,3 +99,5 @@ public class Thing {
     Usage: `Server.getInstance().getHistory(userName, history->{});`
 
 11. `mixColor(things)`: mix all the colors of given `things` to one color, temporarily return as an integer. (May add hex-decimal conversion in the future)
+
+12. `getAddress(context, location)`: get accurate address
