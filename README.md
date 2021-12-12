@@ -7,7 +7,7 @@ Final Project for CS5520
 
 ThingsHub is an mobile software that can track everything of everyday via 'Things Calendar'.
 
-[Download here](./app/release/ThingsHub.apk)
+[Download here](https://github.com/zjdx1998/ThingsHub/raw/main/app/release/ThinsHub.apk)
 
 ## Contributor
 
