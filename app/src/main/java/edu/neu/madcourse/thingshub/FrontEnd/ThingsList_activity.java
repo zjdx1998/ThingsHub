@@ -102,7 +102,8 @@ public class ThingsList_activity extends AppCompatActivity {
                     Server.getInstance().markCompleted(itemList.get(position).getName());
                     itemList.remove(position);
                     mMyAdapter.notifyItemRemoved(position);
-                    Toast.makeText(ThingsList_activity.this,position + "Mark as completed!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThingsList_activity.this,"Mark as completed!",Toast.LENGTH_SHORT).show();
+                    initCalendar();
                 }
             }
         });
