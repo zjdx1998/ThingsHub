@@ -176,7 +176,8 @@ public class ContributionView extends View {
             ContributionItem item = data.get(i);
             calendar.setTime(item.getTime());
             itemTime = calendar.getTimeInMillis();
-            day = (int) ((itemTime - startTime) / 1000 / 3600 / 24) + config.getStartEmpty();
+            //day = (int) ((itemTime - startTime) / 1000 / 3600 / 24) + config.getStartEmpty();
+            day = i + config.getStartEmpty();
             item.setCol(day / 7);
             item.setRow(day % 7);
             RectF rect = new RectF(xOffset + item.getCol() * perWidth,
