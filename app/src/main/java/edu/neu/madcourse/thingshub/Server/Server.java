@@ -178,8 +178,8 @@ public class Server {
             Thing thing = task.getResult().getValue(Thing.class);
             thing.setCompleted(true);
             finalDbRef[0].child(thingName).setValue(thing);
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String date = df.format(Calendar.getInstance().getTime());
+            //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String date = thing.getEndDate().toKey();//df.format(Calendar.getInstance().getTime());
             finalDbRef[0] = database.getReference("/Users/"+User.getInstance().getUserName()+"/History");
             finalDbRef[0].child(date).child(thing.toKey()).setValue(thing);
         });
